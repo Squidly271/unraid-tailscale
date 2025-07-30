@@ -1,0 +1,56 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN>
+
+<PLUGIN 
+  name="{{ name }}"
+  author="{{ author }}"
+  version="{{ env['PLUGIN_VERSION'] }}"
+  {% if launch is defined %}launch="{{ launch }}"{% endif %}
+  pluginURL="https://raw.githubusercontent.com/{{ env['GITHUB_REPOSITORY'] }}/main/plugin/{{ name }}.plg"
+  {% if support is defined %}support="{{ support }}"{% endif %}
+  {% if min is defined %}min="{{ min }}"{% endif %}
+  {% if max is defined %}max="{{ max }}"{% endif %}
+  {% if icon is defined %}icon="{{ icon }}"{% endif %}
+>
+
+<CHANGES>
+<![CDATA[
+{{ env['PLUGIN_CHANGELOG'] }}
+
+For older releases, see https://github.com/{{ env['GITHUB_REPOSITORY'] }}/releases
+]]>
+</CHANGES>
+
+<FILE Name="/boot/config/plugins/{{ name }}/{{ tailscaleVersion }}.tgz">
+<URL>https://pkgs.tailscale.com/stable/{{ tailscaleVersion }}.tgz</URL>
+<SHA256>{{ tailscaleSHA256 }}</SHA256>
+</FILE>
+
+<FILE Name="/boot/config/plugins/{{ name }}/unraid-tailscale-utils-{{ packageVersion }}-noarch-1.txz">
+<URL>https://github.com/unraid/unraid-tailscale-utils/releases/download/{{ packageVersion }}/unraid-tailscale-utils-{{ packageVersion }}-noarch-1.txz</URL>
+<SHA256>{{ packageSHA256 }}</SHA256>
+</FILE>
+
+<!--
+The 'install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+<![CDATA[
+{% include "../files/install.sh" %}
+]]>
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+<![CDATA[
+{% include "../files/remove.sh" %}
+]]>
+</INLINE>
+</FILE>
+
+</PLUGIN>
