@@ -1,6 +1,15 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN>
 
+{% set pluginDirectory = "/usr/local/emhttp/plugins/tailscale" -%}
+{% set configDirectory = "/boot/config/plugins/tailscale" -%}
+{% set version = env['PLUGIN_VERSION'] -%}
+{% if env['PLUGIN_RELEASE'] == "-preview" -%}
+{% set branch = "preview" -%}
+{% else -%}
+{% set branch = "main" -%}
+{% endif -%}
+
 <PLUGIN 
   name="{{ name }}"
   author="{{ author }}"

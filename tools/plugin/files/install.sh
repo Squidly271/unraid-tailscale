@@ -12,10 +12,6 @@ echo "state" > {{ configDirectory }}/.gitignore
 ln -s {{ pluginDirectory }}/bin/tailscale /usr/local/sbin/tailscale
 ln -s {{ pluginDirectory }}/bin/tailscaled /usr/local/sbin/tailscaled
 
-mkdir -p /var/local/emhttp/plugins/tailscale
-echo "VERSION={{ version }}" > /var/local/emhttp/plugins/tailscale/tailscale.ini
-echo "BRANCH={{ branch }}" >> /var/local/emhttp/plugins/tailscale/tailscale.ini
-
 # remove other branches (e.g., if switching from main to preview)
 {% if branch != 'main' -%}
 rm -f /boot/config/plugins/tailscale.plg
