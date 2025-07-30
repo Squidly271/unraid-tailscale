@@ -16,3 +16,4 @@ jobs:
           plg_branch: trunk
           build_package: false
           build_prereleases: true
+          ssh_key: ${{ secrets.DEPLOY_KEY }}
