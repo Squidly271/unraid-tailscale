@@ -22,11 +22,12 @@
 
 ### 2025.07.28
 
-* build: 2025.07.28 by @dkaser in https://github.com/unraid/unraid-tailscale/pull/23
+- Revert Tailscale to 1.84.0 (1.86.0 removed upstream)
 
 ### 2025.07.26
 
-* build: 2025.07.26 by @dkaser in https://github.com/unraid/unraid-tailscale/pull/22
+- Update Tailscale to 1.86.0
+- Updates for Unraid 7.2
 
 
 For older releases, see https://github.com/unraid/unraid-tailscale/releases
