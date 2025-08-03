@@ -39,7 +39,7 @@ if ( ! $tailscaleConfig->Enable) {
 
 $tailscaleInfo = $tailscaleInfo ?? new Info($tr);
 ?>
-
+<link type="text/css" rel="stylesheet" href="/plugins/tailscale/style.css">
 <script src="/webGui/javascript/jquery.tablesorter.widgets.js"></script>
 
 <script src="/plugins/tailscale/vendor/select2/select2.min.js"></script>
