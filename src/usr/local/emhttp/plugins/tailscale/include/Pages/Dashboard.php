@@ -45,18 +45,35 @@ echo <<<EOT
     <tbody title="Tailscale">
     <tr>
         <td>
-            <span class='tile-header'>
-                <span class='tile-header-left'>
+            <div class='tile-header' id='tailscale-dashboard-card'>
+                <div class='tile-header-left'>
                     <img style="margin-right: 8px; width: 32px; height: 32px" src="/plugins/tailscale/tailscale.png" alt="Tailscale">
-                    Tailscale
-                </span>
-                <span class='tile-header-right'>
-                    <span class='tile-header-right-controls'><a href="/Settings/Tailscale" title="_(Settings)_"><i class="fa fa-fw fa-cog control"></i></a></span>
-                </span>
-            </span>
+                    <div class='section'>
+                        <h3 class='tile-header-main' id='tailscale-dashboard-title'>Tailscale</h3>
+                    </div>
+                </div>
+                <div class='tile-header-right'>
+                    <div class='tile-header-right-controls'>
+                        <a id="tailscale-settings-button" href="/Settings/Tailscale" title="_(Settings)_"><i class="fa fa-fw fa-cog control"></i></a></div>
+                </div>
+            </div>
         </td>
     </tr>
             
     {$tailscale_dashboard}
     </tbody>
     EOT;
+
+$isResponsiveWebgui = version_compare(parse_ini_file('/etc/unraid-version')['version'] ?? "", '7.2', '>=');
+if ( ! $isResponsiveWebgui) {
+    echo <<<EOT
+        <script>
+            $(function() {
+                $('#tailscale-dashboard-title').replaceWith(function() {
+                    return $(this).text() + "<br>";
+                });
+                $('#tailscale-settings-button').prependTo('#tailscale-dashboard-card');
+            });
+        </script>
+        EOT;
+}
