@@ -17,3 +17,33 @@ jobs:
           build_prereleases: true
           ssh_key: ${{ secrets.DEPLOY_KEY }}
           composer_dir: src/usr/local/php/unraid-tailscale-utils/
+
+      - name: Actions for Discord (Release)
+        uses: Ilshidur/action-discord@d2594079a10f1d6739ee50a2471f0ca57418b554
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.TAILSCALE_DISCORD_WEBHOOK }}
+        with:
+          args: |
+            🚀 **Tailscale Release ${{ github.event.release.name }}**
+
+            View Release: ${{ github.event.release.html_url }}
+
+            **Changelog:**
+
+            ${{ github.event.release.body }}
+        if: github.event.release.prerelease == false
+
+      - name: Actions for Discord (Preview)
+        uses: Ilshidur/action-discord@d2594079a10f1d6739ee50a2471f0ca57418b554
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.TAILSCALE_DISCORD_WEBHOOK }}
+        with:
+          args: |
+            🚀 **Tailscale Preview ${{ github.event.release.name }}**
+
+            View Release: ${{ github.event.release.html_url }}
+
+            **Changelog:**
+
+            ${{ github.event.release.body }}
+        if: github.event.release.prerelease == true
