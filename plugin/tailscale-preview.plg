@@ -21,7 +21,7 @@
 ## What's Changed
 * fix: restore select2 after repo migration (#30)
 * feat: restart tsidp if present (#31)
-* ci: add Discord action (#32)
+* ci: add Discord action (#32) 
 
 ### 2025.08.17
 
