@@ -16,9 +16,13 @@
 <CHANGES>
 <![CDATA[
 
+### 2025.09.12.0305
+
+
+
 ### 2025.09.11
 
-- feat: update Tailscale to 1.88.1 (#35)
+- feat: update Tailscale to 1.88.1 (#35) 
 
 ### 2025.09.04
 
@@ -26,12 +30,6 @@
 * fix: restore select2 after repo migration (#30)
 * feat: restart tsidp if present (#31)
 * ci: add Discord action (#32) 
-
-### 2025.08.17
-
-* fix: 7.2 updates
-* fix: don't run funnel check before 7.2
-* fix: change flag for debug mode
 
 
 For older releases, see https://github.com/unraid/unraid-tailscale/releases
