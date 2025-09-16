@@ -16,6 +16,10 @@
 <CHANGES>
 <![CDATA[
 
+### 2025.09.16.0356
+
+* No changes
+
 ### 2025.09.16.0350
 
 ### 🚀 Features
@@ -25,13 +29,6 @@
 ### 2025.09.11
 
 - feat: update Tailscale to 1.88.1 (#35) 
-
-### 2025.09.04
-
-## What's Changed
-* fix: restore select2 after repo migration (#30)
-* feat: restart tsidp if present (#31)
-* ci: add Discord action (#32) 
 
 
 For older releases, see https://github.com/unraid/unraid-tailscale/releases
