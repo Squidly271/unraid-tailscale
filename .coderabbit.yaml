@@ -4,13 +4,12 @@ enable_free_tier: true
 reviews:
   profile: chill
   poem: false
+  pre_merge_checks:
+    docstrings:
+      mode: off
   finishing_touches:
     docstrings:
-      enabled: false
-    unit_tests:
       enabled: false
   tools:
     phpstan:
       enabled: false
-      level: default
-
