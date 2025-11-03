@@ -4,7 +4,7 @@
 <PLUGIN 
   name="tailscale"
   author="Derek Kaser"
-  version="2025.10.31.0431"
+  version="2025.11.03.0419"
   launch="Settings/Tailscale"
   pluginURL="https://raw.githubusercontent.com/unraid/unraid-tailscale/preview/plugin/tailscale-preview.plg"
   support="https://forums.unraid.net/topic/136889-plugin-tailscale/"
@@ -15,6 +15,18 @@
 
 <CHANGES>
 <![CDATA[
+
+### 2025.11.03.0419
+
+### 🚀 Features
+
+- Configure peer relay port via GUI ([#53](https://github.com/unraid/unraid-tailscale/pull/53))
+
+### 🧰 Maintenance
+
+- Bump supported version to 7.1 ([#59](https://github.com/unraid/unraid-tailscale/pull/59))
+- Update Tailscale to 1.90.6 ([#58](https://github.com/unraid/unraid-tailscale/pull/58))
+- Update translations from Crowdin ([#57](https://github.com/unraid/unraid-tailscale/pull/57))
 
 ### 2025.10.31.0431
 
@@ -32,25 +44,32 @@
 
 - End buffer if exception occurs in page ([#50](https://github.com/unraid/unraid-tailscale/pull/50))
 
-### 2025.10.03.0217
-
-### 🐛 Bug Fixes
-
-- Potential race condition with emhttpd during boot ([#48](https://github.com/unraid/unraid-tailscale/pull/48))
-
 
 For older releases, see https://github.com/unraid/unraid-tailscale/releases
 ]]>
 </CHANGES>
 
-<FILE Name="/boot/config/plugins/tailscale/tailscale_1.90.5_amd64.tgz">
-<URL>https://pkgs.tailscale.com/stable/tailscale_1.90.5_amd64.tgz</URL>
-<SHA256>901d0310d888e471f0e17b1f2a64fd0d77c0d8848e5a63f0a2b29a9da66e8ac2</SHA256>
+<FILE Run="/bin/bash" max="7.0.99">
+<INLINE>
+<![CDATA[
+echo "Installing the latest version of tailscale requires Unraid 7.1 or later."
+echo "Now installing the last compatible version..."
+
+plugin install https://raw.githubusercontent.com/unraid/unraid-tailscale/refs/tags/unraid-7.0/plugin/tailscale-preview.plg
+
+exit 1
+]]>
+</INLINE>
 </FILE>
 
-<FILE Name="/boot/config/plugins/tailscale/unraid-tailscale-utils-2025.10.31.0431-noarch-1.txz">
-<URL>https://github.com/unraid/unraid-tailscale/releases/download/2025.10.31.0431/unraid-tailscale-utils-2025.10.31.0431-noarch-1.txz</URL>
-<SHA256>5ff36e07555fce2dbcef01c6941b9a5c7a82edc15766cc690a316afb68db288c</SHA256>
+<FILE Name="/boot/config/plugins/tailscale/tailscale_1.90.6_amd64.tgz">
+<URL>https://pkgs.tailscale.com/stable/tailscale_1.90.6_amd64.tgz</URL>
+<SHA256>cc51b5b6fe86a25e66b2ef037334e799a61d06dc64fabcadfe6e2a7588a2b2c7</SHA256>
+</FILE>
+
+<FILE Name="/boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.03.0419-noarch-1.txz">
+<URL>https://github.com/unraid/unraid-tailscale/releases/download/2025.11.03.0419/unraid-tailscale-utils-2025.11.03.0419-noarch-1.txz</URL>
+<SHA256>47207ecb566ab415927306941d569b6e340f4de97e8209765c06190c814add12</SHA256>
 </FILE>
 
 <!--
@@ -63,10 +82,10 @@ if [ -d "/usr/local/emhttp/plugins/tailscale" ]; then
     rm -rf /usr/local/emhttp/plugins/tailscale
 fi
 
-upgradepkg --install-new /boot/config/plugins/tailscale/unraid-tailscale-utils-2025.10.31.0431-noarch-1.txz
+upgradepkg --install-new /boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.03.0419-noarch-1.txz
 
 mkdir -p /usr/local/emhttp/plugins/tailscale/bin
-tar xzf /boot/config/plugins/tailscale/tailscale_1.90.5_amd64.tgz --strip-components 1 -C /usr/local/emhttp/plugins/tailscale/bin
+tar xzf /boot/config/plugins/tailscale/tailscale_1.90.6_amd64.tgz --strip-components 1 -C /usr/local/emhttp/plugins/tailscale/bin
 
 echo "state" > /boot/config/plugins/tailscale/.gitignore
 
@@ -91,8 +110,8 @@ sed -i "s/Tailscale\*\*/Tailscale (Preview)**/" /usr/local/emhttp/plugins/tailsc
 tailscale completion bash > /etc/bash_completion.d/tailscale
 
 # cleanup old versions
-rm -f $(ls /boot/config/plugins/tailscale/unraid-tailscale-utils-*.txz 2>/dev/null | grep -v '2025.10.31.0431')
-rm -f $(ls /boot/config/plugins/tailscale/*.tgz 2>/dev/null | grep -v 'tailscale_1.90.5_amd64')
+rm -f $(ls /boot/config/plugins/tailscale/unraid-tailscale-utils-*.txz 2>/dev/null | grep -v '2025.11.03.0419')
+rm -f $(ls /boot/config/plugins/tailscale/*.tgz 2>/dev/null | grep -v 'tailscale_1.90.6_amd64')
 
 # check to see if the state file has been backed up to Unraid Connect
 if [ -d "/boot/.git" ]; then
@@ -115,7 +134,7 @@ fi
 echo ""
 echo "----------------------------------------------------"
 echo " tailscale has been installed."
-echo " Version: 2025.10.31.0431"
+echo " Version: 2025.11.03.0419"
 echo "----------------------------------------------------"
 echo ""
 ]]>
