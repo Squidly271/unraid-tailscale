@@ -215,7 +215,7 @@ if ($tailscaleConfig->Enable) {
 <dl>
     <dt><?= $tr->tr("settings.context.reauthenticate"); ?></dt>
     <dd>
-        <span><input type="button" value="<?= $tr->tr('settings.reauthenticate'); ?>" onclick="expireTailscaleKeyNow()" <?= $tailscaleDisconnect; ?>></span>
+        <span><input type="button" value="<?= $tr->tr('settings.reauthenticate'); ?>" onclick="tailscaleUp()" <?= $tailscaleDisconnect; ?>></span>
     </dd>
 </dl>
 
@@ -239,12 +239,6 @@ if ($tailscaleConfig->Enable) {
         e.disabled = true;
         var confirmButton = document.getElementById('tailscale_erase_confirm');
         confirmButton.style.display = "inline";
-    }
-
-    async function expireTailscaleKeyNow() {
-        $('div.spinner.fixed').show('fast');
-        var res = await $.post('/plugins/tailscale/include/data/Config.php',{action: 'expire-key'});
-        location.reload();
     }
 </script>
 <script>
