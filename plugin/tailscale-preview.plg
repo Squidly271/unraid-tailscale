@@ -4,7 +4,7 @@
 <PLUGIN 
   name="tailscale"
   author="Derek Kaser"
-  version="2025.11.15.1618"
+  version="2025.11.20.0009"
   launch="Settings/Tailscale"
   pluginURL="https://raw.githubusercontent.com/unraid/unraid-tailscale/preview/plugin/tailscale-preview.plg"
   support="https://forums.unraid.net/topic/136889-plugin-tailscale/"
@@ -15,6 +15,16 @@
 
 <CHANGES>
 <![CDATA[
+
+### 2025.11.20.0009
+
+### 🐛 Bug Fixes
+
+- Header placement on 7.1 ([#74](https://github.com/unraid/unraid-tailscale/pull/74))
+
+### 🧰 Maintenance
+
+- Update Tailscale to 1.90.8 ([#75](https://github.com/unraid/unraid-tailscale/pull/75))
 
 ### 2025.11.15.1618
 
@@ -38,18 +48,6 @@
 ### 🧰 Maintenance
 
 - Update translations from Crowdin ([#65](https://github.com/unraid/unraid-tailscale/pull/65)) 
-
-### 2025.11.03.0444
-
-### 🚀 Features
-
-- Configure peer relay port via GUI ([#53](https://github.com/unraid/unraid-tailscale/pull/53))
-
-### 🧰 Maintenance
-
-- Bump supported version to 7.1 ([#59](https://github.com/unraid/unraid-tailscale/pull/59))
-- Update Tailscale to 1.90.6 ([#58](https://github.com/unraid/unraid-tailscale/pull/58))
-- Update translations from Crowdin ([#57](https://github.com/unraid/unraid-tailscale/pull/57))
 
 
 For older releases, see https://github.com/unraid/unraid-tailscale/releases
@@ -88,14 +86,14 @@ if ($oldPlugin !== "") {
 </INLINE>
 </FILE>
 
-<FILE Name="/boot/config/plugins/tailscale/tailscale_1.90.6_amd64.tgz">
-<URL>https://pkgs.tailscale.com/stable/tailscale_1.90.6_amd64.tgz</URL>
-<SHA256>cc51b5b6fe86a25e66b2ef037334e799a61d06dc64fabcadfe6e2a7588a2b2c7</SHA256>
+<FILE Name="/boot/config/plugins/tailscale/tailscale_1.90.8_amd64.tgz">
+<URL>https://pkgs.tailscale.com/stable/tailscale_1.90.8_amd64.tgz</URL>
+<SHA256>954f7cbc41cc0ff55ff10612458c3266356464b94c3da95fb497723c5f131b5f</SHA256>
 </FILE>
 
-<FILE Name="/boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.15.1618-noarch-1.txz">
-<URL>https://github.com/unraid/unraid-tailscale/releases/download/2025.11.15.1618/unraid-tailscale-utils-2025.11.15.1618-noarch-1.txz</URL>
-<SHA256>9fff89e47132b56f9dbc2fcbbd3c34da78a4071f92052eb76d1893fd60a32f17</SHA256>
+<FILE Name="/boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.20.0009-noarch-1.txz">
+<URL>https://github.com/unraid/unraid-tailscale/releases/download/2025.11.20.0009/unraid-tailscale-utils-2025.11.20.0009-noarch-1.txz</URL>
+<SHA256>bdcc08a26d503dde2c07baa53347c321261e1c79fa256cebadff5b1174bf4f61</SHA256>
 </FILE>
 
 <!--
@@ -113,10 +111,10 @@ if [ -L "/etc/rc.d/rc.tailscale" ]; then
     rm -f /etc/rc.d/rc.tailscale
 fi
 
-upgradepkg --install-new /boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.15.1618-noarch-1.txz
+upgradepkg --install-new /boot/config/plugins/tailscale/unraid-tailscale-utils-2025.11.20.0009-noarch-1.txz
 
 mkdir -p /usr/local/emhttp/plugins/tailscale/bin
-tar xzf /boot/config/plugins/tailscale/tailscale_1.90.6_amd64.tgz --strip-components 1 -C /usr/local/emhttp/plugins/tailscale/bin
+tar xzf /boot/config/plugins/tailscale/tailscale_1.90.8_amd64.tgz --strip-components 1 -C /usr/local/emhttp/plugins/tailscale/bin
 
 echo "state" > /boot/config/plugins/tailscale/.gitignore
 
@@ -141,8 +139,8 @@ sed -i "s/Tailscale\*\*/Tailscale (Preview)**/" /usr/local/emhttp/plugins/tailsc
 tailscale completion bash > /etc/bash_completion.d/tailscale
 
 # cleanup old versions
-rm -f $(ls /boot/config/plugins/tailscale/unraid-tailscale-utils-*.txz 2>/dev/null | grep -v '2025.11.15.1618')
-rm -f $(ls /boot/config/plugins/tailscale/*.tgz 2>/dev/null | grep -v 'tailscale_1.90.6_amd64')
+rm -f $(ls /boot/config/plugins/tailscale/unraid-tailscale-utils-*.txz 2>/dev/null | grep -v '2025.11.20.0009')
+rm -f $(ls /boot/config/plugins/tailscale/*.tgz 2>/dev/null | grep -v 'tailscale_1.90.8_amd64')
 
 # check to see if the state file has been backed up to Unraid Connect
 if [ -d "/boot/.git" ]; then
@@ -165,7 +163,7 @@ fi
 echo ""
 echo "----------------------------------------------------"
 echo " tailscale has been installed."
-echo " Version: 2025.11.15.1618"
+echo " Version: 2025.11.20.0009"
 echo "----------------------------------------------------"
 echo ""
 ]]>
